@@ -17,8 +17,6 @@ const Comment: React.FC<CommentProps> = (comment: CommentProps) => {
     comment.comment?.author?.fetch().then((result) => {
       setAuthor(result);
     });
-
-    console.log(comment);
   }, [comment]);
 
   return (

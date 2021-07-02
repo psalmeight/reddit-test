@@ -1,5 +1,4 @@
 import Container from "@material-ui/core/Container";
-
 interface Props {
   title?: string;
   children: React.ReactElement<any, any> | Element[];
