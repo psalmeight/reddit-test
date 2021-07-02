@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Fragment } from "react";
+import Snoowrap from "snoowrap";
+
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import Snoowrap from "snoowrap";
 
 interface CommentProps {
   comment?: Snoowrap.Comment;

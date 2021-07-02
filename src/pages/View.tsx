@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import SnowWrap from "snoowrap";
+import Snoowrap from "snoowrap";
 
 import List from "@material-ui/core/List";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -9,11 +9,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import CustomContainer from "../components/CustomContainer";
 import Comment from "../components/Comment";
 import { SnowWrapContext } from "../context/SnowWrapContext";
-import Snoowrap from "snoowrap";
 
 interface Submission {
-  content: SnowWrap.Submission | undefined;
-  comments: SnowWrap.Listing<SnowWrap.Comment> | undefined;
+  content: Snoowrap.Submission | undefined;
+  comments: Snoowrap.Listing<Snoowrap.Comment> | undefined;
 }
 
 function View() {
