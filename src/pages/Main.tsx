@@ -71,33 +71,17 @@ export default function Main() {
         ) : null}
 
         <div>
-          <div>
-            <Button
-              variant="contained"
-              style={{ marginRight: 5 }}
-              onClick={() => changeSort("hot")}
-            >
+          <div className="filter-group">
+            <Button variant="contained" onClick={() => changeSort("hot")}>
               Hot
             </Button>
-            <Button
-              variant="contained"
-              style={{ marginRight: 5 }}
-              onClick={() => changeSort("best")}
-            >
+            <Button variant="contained" onClick={() => changeSort("best")}>
               Best
             </Button>
-            <Button
-              variant="contained"
-              style={{ marginRight: 5 }}
-              onClick={() => changeSort("new")}
-            >
+            <Button variant="contained" onClick={() => changeSort("new")}>
               New
             </Button>
-            <Button
-              variant="contained"
-              style={{ marginRight: 5 }}
-              onClick={() => changeSort("top")}
-            >
+            <Button variant="contained" onClick={() => changeSort("top")}>
               Top
             </Button>
           </div>

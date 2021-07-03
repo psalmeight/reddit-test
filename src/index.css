@@ -16,3 +16,25 @@ code {
   width: 100% !important;
   height: 385px;
 }
+
+.post-container {
+  margin-bottom: 10;
+  cursor: pointer;
+}
+
+.subreddit-name,
+.author-name {
+  font-size: 15px;
+}
+
+.subreddit-name {
+  font-weight: bold;
+}
+
+.filter-group button {
+  margin-right: 5px;
+}
+
+.replies-margin {
+  margin-left: 30px !important;
+}

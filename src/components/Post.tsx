@@ -27,28 +27,27 @@ const Post: React.FC<SubmissionProps> = ({ content, onClick }) => {
       setAuthor(result);
     });
 
-    if (content?.post_hint) {
-      if (content?.media !== null) {
-        let vidContent = "";
-        if ("reddit_video" in content?.media) {
-          vidContent = `<iframe src=${content?.media.reddit_video?.fallback_url} />`;
-        } else if ("oembed" in content?.media) {
-          vidContent =
-            content?.media?.oembed?.html ||
-            `<iframe src="https://example.com" />`;
-        }
-
-        setState({
-          ...state,
-          isVideo: content?.media !== null || false,
-          videoContent: vidContent,
-        });
+    //This is to check if the content has video/links
+    if (content?.media) {
+      let vidContent = "";
+      if ("reddit_video" in content?.media) {
+        vidContent = `<iframe src=${content?.media.reddit_video?.fallback_url} />`;
+      } else if ("oembed" in content?.media) {
+        vidContent =
+          content?.media?.oembed?.html ||
+          `<iframe src="https://example.com" />`;
       }
+
+      setState({
+        ...state,
+        isVideo: content?.media !== null || false,
+        videoContent: vidContent,
+      });
     }
   }, [content]);
 
   return (
-    <Card style={{ marginBottom: 10 }}>
+    <Card className="post-container">
       <ListItem alignItems="flex-start" onClick={onClick}>
         <ListItemAvatar>
           <Avatar alt="Avatar" src={author?.icon_img} />
@@ -56,10 +55,10 @@ const Post: React.FC<SubmissionProps> = ({ content, onClick }) => {
         <ListItemText
           primary={
             <div>
-              <span style={{ fontSize: 15, fontWeight: "bold" }}>
+              <span className="subreddit-name">
                 {content?.subreddit_name_prefixed}
               </span>
-              <span style={{ fontSize: 15 }}>
+              <span className="author-name">
                 {" "}
                 | {author?.name}{" "}
                 {content?.created
@@ -73,6 +72,7 @@ const Post: React.FC<SubmissionProps> = ({ content, onClick }) => {
           }
           secondary={
             <Fragment>
+              {/* If content has a permalink */}
               <p>
                 {content?.url ? (
                   <a href={content?.url} target="_blank">
@@ -80,6 +80,8 @@ const Post: React.FC<SubmissionProps> = ({ content, onClick }) => {
                   </a>
                 ) : null}
               </p>
+
+              {/* If content has an image preview */}
               {content?.media === null &&
               content?.preview &&
               content?.preview?.images.length > 0 ? (
@@ -89,6 +91,7 @@ const Post: React.FC<SubmissionProps> = ({ content, onClick }) => {
                 />
               ) : null}
 
+              {/* If content has an embedded media */}
               {state.isVideo && content?.secure_media !== null ? (
                 <div
                   className={"videoFrame"}
@@ -98,6 +101,7 @@ const Post: React.FC<SubmissionProps> = ({ content, onClick }) => {
                 />
               ) : null}
 
+              {/* If content has html content */}
               {content?.selftext_html ? (
                 <div
                   dangerouslySetInnerHTML={{ __html: content?.selftext_html }}

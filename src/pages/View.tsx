@@ -26,9 +26,7 @@ function View() {
     r.getSubmission(id).fetch()
   );
 
-  //confidence, top, new, controversial, old, random, qa, live
   useEffect(() => {
-    console.log(data);
     setState({
       content: data,
       comments: data?.comments,
@@ -41,8 +39,10 @@ function View() {
       return (
         <div>
           <Comment key={idx} comment={comment} />
+
+          {/* recursive implementation for replies */}
           {comment?.replies?.length > 0 ? (
-            <List style={{ marginLeft: 20 }}>
+            <List className="replies-margin">
               {comment?.replies?.map(renderComment)}
             </List>
           ) : null}
