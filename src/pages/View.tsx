@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import CustomContainer from "../components/CustomContainer";
 import Comment from "../components/Comment";
+import Post from "../components/Post";
 import { SnowWrapContext } from "../context/SnowWrapContext";
 
 interface Submission {
@@ -25,12 +26,17 @@ function View() {
     r.getSubmission(id).fetch()
   );
 
+  //confidence, top, new, controversial, old, random, qa, live
   useEffect(() => {
     setState({
       content: data,
       comments: data?.comments,
     });
   }, [data]);
+
+  // useEffect(() => {
+  //   console.log(data2);
+  // }, [data2]);
 
   const renderComment = (comment: Snoowrap.Comment, idx: any) => {
     //some comments maybe deleted upon viewing
@@ -50,18 +56,12 @@ function View() {
   const content = state?.content;
 
   return (
-    <CustomContainer title={content?.title}>
+    <CustomContainer>
       {isLoading ? (
         <CircularProgress />
       ) : (
         <div>
-          {/* Showing links if there's any */}
-          {content?.url ? <a href={`${content?.url}`}>{content?.url}</a> : null}
-
-          {/* Showing html content if there's any */}
-          {content?.selftext_html ? (
-            <div dangerouslySetInnerHTML={{ __html: content?.selftext_html }} />
-          ) : null}
+          <Post content={state?.content} />
 
           {/* Showing comments if there's any */}
           <h4>Comments</h4>
