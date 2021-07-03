@@ -28,15 +28,12 @@ function View() {
 
   //confidence, top, new, controversial, old, random, qa, live
   useEffect(() => {
+    console.log(data);
     setState({
       content: data,
       comments: data?.comments,
     });
   }, [data]);
-
-  // useEffect(() => {
-  //   console.log(data2);
-  // }, [data2]);
 
   const renderComment = (comment: Snoowrap.Comment, idx: any) => {
     //some comments maybe deleted upon viewing
@@ -52,8 +49,6 @@ function View() {
         </div>
       );
   };
-
-  const content = state?.content;
 
   return (
     <CustomContainer>

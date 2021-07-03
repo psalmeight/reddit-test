@@ -5,7 +5,6 @@ import { useQuery } from "react-query";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -33,7 +32,7 @@ export default function Main() {
   });
   const [list, setList] = useState<SnowWrap.Listing<SnowWrap.Submission>>();
 
-  const { isLoading, data, refetch, isFetching } = useQuery("data", () => {
+  const { data, refetch, isFetching } = useQuery("data", () => {
     switch (state.sort) {
       case "hot":
         return r.getHot().then((result) => result);
@@ -47,14 +46,12 @@ export default function Main() {
   });
 
   useEffect(() => {
-    //console.log(data);
     setList(data);
   }, [data]);
 
   useEffect(() => {
-    console.log(state);
     refetch();
-  }, [state]);
+  }, [state, refetch]);
 
   const viewPost = (id: string) => {
     router.push(`/view/${id}`);
@@ -107,7 +104,13 @@ export default function Main() {
           <List component="nav">
             {list ? (
               list.map((row) => {
-                return <Post content={row} onClick={() => viewPost(row.id)} />;
+                return (
+                  <Post
+                    key={row.id}
+                    content={row}
+                    onClick={() => viewPost(row.id)}
+                  />
+                );
               })
             ) : (
               <span>0 results</span>
