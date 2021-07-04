@@ -42,6 +42,8 @@ export default function Main() {
         return r.getNew().then((result) => result);
       case "top":
         return r.getTop().then((result) => result);
+      case "controversial":
+        return r.getControversial().then((result) => result);
     }
   });
 
@@ -83,6 +85,12 @@ export default function Main() {
             </Button>
             <Button variant="contained" onClick={() => changeSort("top")}>
               Top
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => changeSort("controversial")}
+            >
+              Controversial
             </Button>
           </div>
           <List component="nav">
